@@ -16,7 +16,7 @@ variable "project" {
 }
 
 resource "aws_s3_bucket" "recipes" {
-  bucket = "euans_recipes"
+  bucket = "euans-recipes"
 }
 
 data "archive_file" "recipes" {
