@@ -1,7 +1,9 @@
 name: "Deploy GH Repo to S3"
 
 on:
-  workflow-dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
   tf-deploy:
