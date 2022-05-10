@@ -29,5 +29,5 @@ jobs:
       - name: terraform plan
         run: |
           terraform plan -out=plan.output
-      # - name: terraform apply
-      #   run: terraform apply -auto-approve -input=false plan.output
+      - name: terraform apply
+        run: terraform apply -auto-approve -input=false plan.output
