@@ -1,0 +1,20 @@
+name: "Deploy GH Repo to S3"
+
+on:
+  workflow-dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploys to AWS S3
+    steps:
+      - name: Pickup AWS Creds and Terraform Role
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-west-1
+          role-to-assume: ${{ secrets.AWS_DEPLOYMENT_ROLE }}
+          role-session-name: GitHubActions-${{ github.even.repository.name }}
+          role-duration-seconds: 3600
+
