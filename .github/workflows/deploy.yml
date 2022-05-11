@@ -11,7 +11,7 @@ jobs:
     name: DEV Deploys to AWS S3
     environment: DEV
     env:
-      TF_VAR_env: ${{ lower(github.event.inputs.environment) }}
+      TF_VAR_env: dev
       TF_VAR_project: ${{ github.event.repository.name }}
     steps:
       - name: Checkout repo
