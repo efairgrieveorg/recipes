@@ -5,13 +5,18 @@ on:
     inputs:
       plan-only:
         type: boolean
-        description: Tick this box to confirm the destroy. If left unticked it will only plan.
+        description: Leave this box unticked to confirm your destroy plan. Once you have confirmed it, tick this box to perform the destroy.
         required: true
+      environment:
+        type: environment
+        required: true
+        description: In which environment do you want to destroy the resources?
 
 jobs:
   tf-destroy:
     runs-on: ubuntu-latest
     name: Tearing Down the Infrastructure
+    environment: ${{ github.event.inputs.environment }}
     env:
       TF_VAR_project: ${{ github.event.repository.name }}
     steps:

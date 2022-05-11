@@ -15,8 +15,13 @@ variable "project" {
     type = string
 }
 
+variable "env" {
+  description = "The environment"
+  type = string
+}
+
 resource "aws_s3_bucket" "recipes" {
-  bucket = "euans-recipes"
+  bucket = "${var.env}-euans-recipes"
 }
 
 data "archive_file" "recipes" {

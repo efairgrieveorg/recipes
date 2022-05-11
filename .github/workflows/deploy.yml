@@ -9,7 +9,9 @@ jobs:
   tf-deploy:
     runs-on: ubuntu-latest
     name: Deploys to AWS S3
+    environment: DEV
     env:
+      TF_VAR_env: dev
       TF_VAR_project: ${{ github.event.repository.name }}
     steps:
       - name: Checkout repo
