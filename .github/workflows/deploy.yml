@@ -3,7 +3,7 @@ name: "Deploy GH Repo to S3"
 on:
   push:
     branches:
-      - main
+      - develop
 
 jobs:
   dev-tf-deploy:
