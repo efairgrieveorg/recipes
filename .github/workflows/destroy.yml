@@ -34,4 +34,4 @@ jobs:
           terraform plan -out=plan.output -destroy
       - name: terraform destroy
         if: ${{ github.event.inputs.plan-only == 'true' }}
-        run: terraform destroy -auto-approve
+        run: terraform apply -auto-approve plan.output
