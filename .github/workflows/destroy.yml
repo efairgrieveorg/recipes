@@ -11,7 +11,7 @@ on:
 jobs:
   tf-destroy:
     runs-on: ubuntu-latest
-    name: Deploys to AWS S3
+    name: Tearing Down the Infrastructure
     env:
       TF_VAR_project: ${{ github.event.repository.name }}
     steps:
