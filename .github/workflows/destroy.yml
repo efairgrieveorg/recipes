@@ -1,0 +1,37 @@
+name: "Terraform Destroy"
+
+on:
+  workflow_dispatch:
+    inputs:
+      plan-only:
+        type: boolean
+        description: True to just plan the destroy, False to confirm and run the destroy
+        required: true
+
+jobs:
+  tf-destroy:
+    runs-on: ubuntu-latest
+    name: Deploys to AWS S3
+    env:
+      TF_VAR_project: ${{ github.event.repository.name }}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Pickup AWS Creds and Terraform Role
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-west-1
+          role-to-assume: ${{ secrets.AWS_DEPLOYMENT_ROLE }}
+          role-session-name: GitHubActions-${{ github.event.repository.name }}
+          role-duration-seconds: 3600
+      - name: terraform init
+        run: |
+          terraform init -backend-config="bucket=efairgrieve-terraform-states" -backend-config="key=${{ github.event.repository.name }}-state" 
+      - name: terraform plan
+        run: |
+          terraform plan -out=plan.output -destroy
+      - name: terraform destroy
+        if: ${{ github.event.inputs.plan-only == 'false' }}
+        run: terraform destroy -auto-approve
