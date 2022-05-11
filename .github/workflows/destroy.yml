@@ -18,14 +18,15 @@ jobs:
     name: Tearing Down the Infrastructure
     environment: ${{ github.event.inputs.environment }}
     env:
-      env_upper: ${{ github.event.inputs.environment }}
+      environment_upper: ${{ github.event.inputs.environment }}
       TF_VAR_project: ${{ github.event.repository.name }}
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
       - name: Set Terraform env variable
         run: |
-          echo "TF_VAR_env=${env.env_upper,,}" >> ${GITHUB_ENV}
+          TF_env_upper="${{ env.environment_upper }}"
+          echo "TF_VAR_env=${TF_env_upper,,}" >> ${GITHUB_ENV}
       - name: Pickup AWS Creds and Terraform Role
         uses: aws-actions/configure-aws-credentials@v1
         with:
