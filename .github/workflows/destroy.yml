@@ -5,7 +5,7 @@ on:
     inputs:
       plan-only:
         type: boolean
-        description: True to just plan the destroy, False to confirm and run the destroy
+        description: Tick this box to confirm the destroy. If left unticked it will only plan.
         required: true
 
 jobs:
@@ -33,5 +33,5 @@ jobs:
         run: |
           terraform plan -out=plan.output -destroy
       - name: terraform destroy
-        if: ${{ github.event.inputs.plan-only == 'false' }}
+        if: ${{ github.event.inputs.plan-only == 'true' }}
         run: terraform destroy -auto-approve
