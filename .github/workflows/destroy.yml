@@ -26,7 +26,7 @@ jobs:
       - name: Set Terraform env variable
         run: |
           TF_env_upper="${{ env.environment_upper }}"
-          echo "TF_VAR_env=sit" >> ${GITHUB_ENV}
+          echo "TF_VAR_env=${TF_env_upper,,}" >> ${GITHUB_ENV}
           echo $TF_VAR_env
       - name: Pickup AWS Creds and Terraform Role
         uses: aws-actions/configure-aws-credentials@v1
