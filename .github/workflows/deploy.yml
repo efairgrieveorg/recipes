@@ -27,7 +27,7 @@ jobs:
           role-duration-seconds: 3600
       - name: terraform init
         run: |
-          terraform init -backend-config="bucket=efairgrieve-terraform-states" -backend-config="key=${{ env.TF_VAR_env }}-${{ github.event.repository.name }}-state" 
+          terraform init -backend-config="bucket=efairgrieve-terraform-states" -backend-config="key=${{ github.event.repository.name }}-state" 
       - name: terraform plan
         run: |
           terraform plan -out=plan.output
@@ -55,7 +55,7 @@ jobs:
           role-duration-seconds: 3600
       - name: terraform init
         run: |
-          terraform init -backend-config="bucket=efairgrieve-terraform-states" -backend-config="key=${{ env.TF_VAR_env }}-${{ github.event.repository.name }}-state" 
+          terraform init -backend-config="bucket=efairgrieve-terraform-states" -backend-config="key=${{ github.event.repository.name }}-state" 
       - name: terraform plan
         run: |
           terraform plan -out=plan.output
