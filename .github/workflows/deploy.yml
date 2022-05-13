@@ -35,6 +35,7 @@ jobs:
         run: terraform apply -auto-approve -input=false plan.output
 
   sit-tf-deploy:
+    needs: [dev-tf-deploy]
     runs-on: ubuntu-latest
     name: SIT Deploys to AWS S3
     environment: SIT
