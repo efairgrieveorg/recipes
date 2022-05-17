@@ -1,12 +1,24 @@
 name: "Deploy GH Repo to S3"
 
 on:
-  push:
+  workflow_dispatch:
     branches:
       - main
+    inputs:
+      env_filter:
+        required: true
+        type: choice
+        description: Which environment would you like to deploy to?
+        options:
+        - DEV
+        - SIT
+        - PRE_PROD
+        - PROD
+
 
 jobs:
   dev-tf-deploy:
+    if: ${{ github.event.inputs.env_filter == 'DEV' }}
     runs-on: ubuntu-latest
     name: DEV Deploys to AWS S3
     environment: DEV
@@ -35,6 +47,7 @@ jobs:
         run: terraform apply -auto-approve -input=false plan.output
 
   sit-tf-deploy:
+    if: ${{ github.event.inputs.env_filter == 'SIT' }}
     needs: [dev-tf-deploy]
     runs-on: ubuntu-latest
     name: SIT Deploys to AWS S3
