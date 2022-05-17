@@ -15,8 +15,16 @@ on:
         - PRE_PROD
         - PROD
 
-
 jobs:
+  pre-run-info:
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    name: Pre-run info
+    steps:
+      - name: Branch and Event for now
+        run: |
+          echo "Running on branch: ${{ github.ref }}"
+
   dev-tf-deploy:
     if: contains(fromJson('["DEV", "SIT", "PRE_PROD", "PROD"]'), github.event.inputs.env_filter)
     runs-on: ubuntu-latest
