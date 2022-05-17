@@ -18,11 +18,7 @@ on:
 
 jobs:
   dev-tf-deploy:
-    if: |
-      github.event.inputs.env_filter == 'DEV' ||
-      github.event.inputs.env_filter == 'SIT' ||
-      github.event.inputs.env_filter == 'PRE_PROD' ||
-      github.event.inputs.env_filter == 'PROD'
+    if: contains(fromJson('["DEV", "SIT", "PRE_PROD", "PROD"]'), github.event.inputs.env_filter)
     runs-on: ubuntu-latest
     name: DEV Deploys to AWS S3
     environment: DEV
@@ -51,10 +47,7 @@ jobs:
         run: terraform apply -auto-approve -input=false plan.output
 
   sit-tf-deploy:
-    if: |
-      github.event.inputs.env_filter == 'SIT' ||
-      github.event.inputs.env_filter == 'PRE_PROD' ||
-      github.event.inputs.env_filter == 'PROD'
+    if: contains(fromJson('["SIT", "PRE_PROD", "PROD"]'), github.event.inputs.env_filter)
     needs: [dev-tf-deploy]
     runs-on: ubuntu-latest
     name: SIT Deploys to AWS S3
