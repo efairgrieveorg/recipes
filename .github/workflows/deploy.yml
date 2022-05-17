@@ -17,7 +17,6 @@ on:
 
 jobs:
   pre-run-info:
-    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     name: Pre-run info
     steps:
@@ -37,6 +36,8 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
+      - name: Read the new file
+        run: cat sample.txt
       - name: Pickup AWS Creds and Terraform Role
         uses: aws-actions/configure-aws-credentials@v1
         with:
