@@ -14,7 +14,6 @@ on:
         - SIT
         - PRE_PROD
 
-
 jobs:
   pre-run-info:
     runs-on: ubuntu-latest
