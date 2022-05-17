@@ -13,7 +13,6 @@ on:
         - DEV
         - SIT
         - PRE_PROD
-        - PROD
 
 
 jobs:
