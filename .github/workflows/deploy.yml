@@ -27,6 +27,7 @@ jobs:
 
   dev-tf-deploy:
     if: contains(fromJson('["DEV", "SIT", "PRE_PROD", "PROD"]'), github.event.inputs.env_filter)
+    needs: [pre-run-info]
     runs-on: ubuntu-latest
     name: DEV Deploys to AWS S3
     environment: DEV
