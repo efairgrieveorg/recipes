@@ -17,6 +17,7 @@ on:
 
 jobs:
   pre-run-info:
+    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     name: Pre-run info
     steps:
