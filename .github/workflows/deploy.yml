@@ -18,6 +18,7 @@ on:
 jobs:
   pre-run-info:
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
     name: Pre-run info
     steps:
       - name: Branch and Event for now
