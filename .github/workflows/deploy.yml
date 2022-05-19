@@ -21,4 +21,4 @@ jobs:
     uses: efairgrieveorg/workflow-templates/.github/workflows/deploy.yml@main
     secrets: inherit
     with:
-      passed_env_filter: github.event.inputs.env_filter
+      passed_env_filter: ${{ github.event.inputs.env_filter }}
