@@ -24,6 +24,11 @@ resource "aws_s3_bucket" "recipes" {
   bucket = "${var.env}-euans-recipes"
 }
 
+resource "aws_s3_bucket" "recipes" {
+  bucket = "${var.env}-testing-recipes"
+}
+
+
 data "archive_file" "recipes" {
   type = "zip"
   source_dir = "${path.module}/markdown_table_gen"
