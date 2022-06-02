@@ -20,7 +20,7 @@ def main(filename: str, recipe_name: str):
         if more_bool in ["y", "yes"]:
             more_ingredients = False
 
-    mdFile = MdUtils(file_name = filename, title = recipe_name)
+    mdFile = MdUtils(file_name = f"recipes/{filename}", title = recipe_name)
 
     mdFile.new_header(level = 1, title = "Description")
     mdFile.new_paragraph(input("Type in an intro descriptive paragraph. Information could include how long it takes to make, are there any hard to get ingredients, how many people does it feed, how nice is it etc: \n"))
